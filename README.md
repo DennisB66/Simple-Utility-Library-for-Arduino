@@ -1,2 +1,2 @@
 # Simple-Utility-Library-for-Arduino
-To-Do
+Library for an Arduino or ESP8266 supporting various utility macros and functions
