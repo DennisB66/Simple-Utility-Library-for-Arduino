@@ -1,7 +1,7 @@
 // Copyright  : Dennis Buis (2017)
 // License    : MIT
 // Platform   : Arduino
-// Library    : Simple Utils Library
+// Library    : Simple Utility Library
 // File       : SimplePrint.h
 // Purpose    : provide simple macros to replace regular print statements
 // Repository : https://github.com/DennisB66/Simple-Utility-Library-for-Arduino

@@ -1,7 +1,7 @@
 // Copyright  : Dennis Buis (2017)
 // License    : MIT
 // Platform   : Arduino
-// Library    : Simple Utils Library
+// Library    : Simple Utility Library
 // File       : SimpleHttp.cpp
 // Purpose    : Provide simple functions to support HTTP messages
 // Repository : https://github.com/DennisB66/Simple-Utility-Library-for-Arduino
