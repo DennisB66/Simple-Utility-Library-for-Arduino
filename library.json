@@ -1,0 +1,22 @@
+{
+  "name": "Simple-Utility-Library-for-Arduino",
+  "keywords": "web, http, api, rest",
+  "description": "Library for an Arduino or ESP8266 supporting various utility macros and functions",
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/DennisB66/Simple-Utility-Library-for-Arduino"
+  },
+  "authors":
+  [
+    {
+      "name": "Dennis Buis",
+      "email": "dennis.buis@gmail.com",
+      "url": "",
+      "maintainer": true
+    }
+  ],
+  "version": "0.2",
+  "frameworks": "arduino",
+  "platforms": "*"
+}
