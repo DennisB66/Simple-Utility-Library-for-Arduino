@@ -28,7 +28,7 @@ void Stopwatch::reset()
 }
 
 // return true = lapse time passed, callback called, stopwatch reset
-bool Stopwatch::check()
+bool Stopwatch::check( bool r)
 {
   if ( millis() > _ticks) {
     if ( _func) ( *_func)();
@@ -37,6 +37,8 @@ bool Stopwatch::check()
 
     return true;
   }
+
+  if ( r) reset();
 
   return false;
 }
@@ -70,18 +72,40 @@ const char* fill( const char* s, int w, bool c)             // width = desired #
     padd = min(( w - size) / 2, w);                         // calc extra spaces at start
   }
 
-  if ( line) {                                               // if buffer is alread initialized
-    line = (char*) realloc( line, ( w + 1) * sizeof( char)); // reallocate if needed
-  } else {
-    line = (char*)  malloc(       ( w + 1) * sizeof( char)); // allocate widt + 1 chars
+  if ( line) {                                              // reallocate (if needed)
+    line = (char*) realloc( line, ( w + 1) * sizeof( char));
+  } else {                                                  // allocate widt + 1 chars
+    line = (char*)  malloc(       ( w + 1) * sizeof( char));
   }
 
-  if ( w) {                                                  // if width is provided
-    memset ( line       , 32, w);                            // fill buffer with spaces
-    memset ( line + w   ,  0, 1);                            // terminate buffer
-    strncpy( line + padd,  s, size);                         // copy source to buffer (centered if needed)
-    return   line;                                           // return buffer
+  if ( w) {                                                 // if width is provided
+    memset ( line       , 32, w);                           // fill buffer with spaces
+    memset ( line + w   ,  0, 1);                           // terminate buffer
+    strncpy( line + padd,  s, size);                        // copy source to buffer (centered if needed)
+    return   line;                                          // return buffer
   } else {
-    return   s;                                              // return source
+    return   s;                                             // return source
   }
+}
+
+const char* dec( unsigned long l, byte n)
+{
+  static char buf[12];                                     // char buffer
+         char fmt[] = "%06lu";                              // decode template
+
+  fmt[2] = (char) ( 48 + n);
+  sprintf( buf, fmt , l);
+
+  return buf;
+}
+
+const char* hex( unsigned long l, byte n)
+{
+  static char buf[12];                                     // char buffer
+         char fmt[] = "%08lX";                              // decode template
+
+  fmt[2] = (char) ( 48 + n);
+  sprintf( buf, fmt , l);
+
+  return buf;
 }

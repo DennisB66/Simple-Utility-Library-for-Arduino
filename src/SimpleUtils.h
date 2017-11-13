@@ -37,11 +37,14 @@
                             digitalWrite(PIN, LOW ); delay(200);\
                             digitalWrite(PIN, HIGH); delay(200)
 
-#define minMax(A,B,C)     min(max(A,B),C)                   // return A between boundaries (B, C)
-#define strLen(A)         (strlen(A)  !=0)                  // return true = empty string (A)
-#define strCmp(A,B)       (strcmp(A,B)==0)                  // return true = equal string (A, B)
-#define strCpy(D,S,L)     strncpy(D,S,L-1);D[L-1]=0         // copy string S into D, incl. terminator at L
-#define strClr(D)         D[0]=0                            // clear string (D)
+#define minMax(A,B,C)       min(max(A,B),C)                   // return A between boundaries (B, C)
+#define strLen(A)           (strlen(A)  !=0)                  // return true = empty string (A)
+#define strCmp(A,B)         (strcmp(A,B)==0)                  // return true = equal string (A, B)
+#define strCpy(D,S,L)       strncpy(D,S,L-1);D[L-1]=0         // copy string S into D, incl. terminator at L
+#define strClr(D)           D[0]=0                            // clear string (D)
+
+#define IF_PASSED(T,F)      static Stopwatch SW(T); if ( SW.check(F))
+#define IF_NOT_PASSED(T,F)  static Stopwatch SW(T); if (!SW.check(F))
 
 typedef void (* StopwatchFunc)();                           // callback function for Stopwatch
 
@@ -51,7 +54,7 @@ public:
 
   void lapse( unsigned long);                               // set lapse (msec), reset stopwatch
   void reset();                                             // reset stopwatch
-  bool check();                                             // return true = lapse passed, callback called, stopwatch reset
+  bool check( bool = false);                                // return true = lapse passed, callback called, stopwatch reset
 
 private:
   StopwatchFunc _func;                                      // callback function
@@ -62,5 +65,7 @@ private:
 
 const char* shiftL( char*, char, char = 0);                 // move string between chars (C1, C2) to start of string
 const char* fill( const char*, int, bool = false);          // fill string with spaces until length L (true = centered)
+const char* hex( unsigned long, byte);                      // convert to hex string with leading zeros
+const char* dec( unsigned long, byte);                      // convert to dec string with leading zeros
 
 #endif
