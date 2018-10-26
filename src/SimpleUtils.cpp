@@ -1,4 +1,4 @@
-// Copyright  : Dennis Buis (2017)
+// Copyright  : Dennis Buis (2017, 2018)
 // License    : MIT
 // Platform   : Arduino
 // Library    : Simple Utility Library
@@ -8,57 +8,31 @@
 
 #include "SimpleUtils.h"
 
-// create stopwatch (msec, function)
-Stopwatch::Stopwatch( unsigned long l, StopwatchFunc f)
+// add char to end of string
+void addChr( char* s, const char c, size_t l)                     // add character to end of string
 {
-  _func = f;
-  lapse( l);
-}
+  size_t i = strlen( s);
 
-// set lapse (msec), reset stopwatch
-void Stopwatch::lapse( unsigned long l)
-{
-  _lapse = l; reset();
-}
-
-// reset stopwatch
-void Stopwatch::reset()
-{
-  _ticks = millis() + _lapse;
-}
-
-// return true = lapse time passed, callback called, stopwatch reset
-bool Stopwatch::check( bool r)
-{
-  if ( millis() > _ticks) {
-    if ( _func) ( *_func)();
-
-    reset();
-
-    return true;
+  if ( i + 1 < l) {
+    s[i    ] = c;
+    s[i + 1] = 0;
   }
-
-  if ( r) reset();
-
-  return false;
 }
 
-// move string between chars (C1, C2) to start of string
-const char* shiftL( char* s, char a, char b)
+//
+void strCpy( char* d, const char* s, size_t l)
 {
-  char* ptr_s = strchr ( s    , a);                         // pointer to first occurence of char a
-  char* ptr_e = strrchr( ptr_s, b ? b : a);                 // pointer to last  occurence of char b
+  l = min( strlen( s), l);
 
-  if ( ptr_s == NULL) return s;                             // check on char a found
-  if ( ptr_e == NULL) return s;                             // check on char b found
+  strncpy( d, s, l); d[l] = 0;
+}
 
-  *ptr_e = 0;                                               // set terminator at char b
+//
+void strCat( char* d, const char* s, size_t l)
+{
+  l = min( strlen( s), l - strlen( d));
 
-  for ( int i = 0; i < ptr_e - ptr_s; i++) {                // move chars between char a and char b
-    s[i] = ptr_s[i + 1];                                    // i + 1 => copy after char a, include terminator at char b
-  }
-
-  return s;                                                 // return result
+  strncat( d, s, l);
 }
 
 // fill string with spaces until length L (true = centered)
@@ -88,24 +62,31 @@ const char* fill( const char* s, int w, bool c)             // width = desired #
   }
 }
 
-const char* dec( unsigned long l, byte n)
+static char _tempBuffer[12];                                // char buffer
+
+const char* dec( unsigned long l)
 {
-  static char buf[12];                                     // char buffer
-         char fmt[] = "%06lu";                              // decode template
+  char fmt[] = "%lu";                                      // decode template
 
-  fmt[2] = (char) ( 48 + n);
-  sprintf( buf, fmt , l);
+  sprintf( _tempBuffer, fmt , l);
 
-  return buf;
+  return _tempBuffer;
 }
 
-const char* hex( unsigned long l, byte n)
+const char* dec( unsigned long l, uint8_t n)
 {
-  static char buf[12];                                     // char buffer
-         char fmt[] = "%08lX";                              // decode template
+  char fmt[] = "%06lu"; fmt[2] = (char) ( 48 + n);          // decode template
 
-  fmt[2] = (char) ( 48 + n);
-  sprintf( buf, fmt , l);
+  sprintf( _tempBuffer, fmt , l);
 
-  return buf;
+  return _tempBuffer;
+}
+
+const char* hex( unsigned long l, uint8_t n)
+{
+  char fmt[] = "%08lX"; fmt[2] = (char) ( 48 + n);          // decode template
+
+  sprintf( _tempBuffer, fmt , l);
+
+  return _tempBuffer;
 }

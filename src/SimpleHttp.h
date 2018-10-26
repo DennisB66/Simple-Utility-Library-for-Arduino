@@ -1,4 +1,4 @@
-// Copyright  : Dennis Buis (2017)
+// Copyright  : Dennis Buis (2017, 2018)
 // License    : MIT
 // Platform   : Arduino
 // Library    : Simple Utility Library

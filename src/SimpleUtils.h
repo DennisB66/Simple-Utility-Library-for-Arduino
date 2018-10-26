@@ -1,4 +1,4 @@
-// Copyright  : Dennis Buis (2017)
+// Copyright  : Dennis Buis (2017, 2018)
 // License    : MIT
 // Platform   : Arduino
 // Library    : Simple Utility Library
@@ -11,9 +11,10 @@
 
 #include <Arduino.h>
 #include "SimplePrint.h"
+#include "SimpleDebug.h"
 
 #if   defined(__AVR__)
-#define LED_BUILTIN     13                                  // built-in LED on Arduino UNO
+//#define LED_BUILTIN     13                                  // built-in LED on Arduino UNO
 #define D0               0
 #define D1               1
 #define D2               2
@@ -29,7 +30,7 @@
 #define D12             12
 #define D13             13
 #elif defined(ESP8266)
-#define LED_BUILTIN      2                                  // built-in LED on Arduino UNO
+//#define LED_BUILTIN      2                                  // built-in LED on ESP8266
 #endif
                                                             // required for Leonardo ETH
 #define ETHERNET_RESET(PIN) pinMode(PIN, OUTPUT);\
@@ -40,32 +41,16 @@
 #define minMax(A,B,C)       min(max(A,B),C)                   // return A between boundaries (B, C)
 #define strLen(A)           (strlen(A)  !=0)                  // return true = empty string (A)
 #define strCmp(A,B)         (strcmp(A,B)==0)                  // return true = equal string (A, B)
-#define strCpy(D,S,L)       strncpy(D,S,L-1);D[L-1]=0         // copy string S into D, incl. terminator at L
 #define strClr(D)           D[0]=0                            // clear string (D)
 
-#define IF_PASSED(T,F)      static Stopwatch SW(T); if ( SW.check(F))
-#define IF_NOT_PASSED(T,F)  static Stopwatch SW(T); if (!SW.check(F))
+void addChr( char*, const char , size_t);                   // add character to end of string
+void strCpy( char*, const char*, size_t);
+void strCat( char*, const char*, size_t);
 
-typedef void (* StopwatchFunc)();                           // callback function for Stopwatch
-
-class Stopwatch {
-public:
-  Stopwatch ( unsigned long, StopwatchFunc f = NULL);       // create stopwatch (msec, function)
-
-  void lapse( unsigned long);                               // set lapse (msec), reset stopwatch
-  void reset();                                             // reset stopwatch
-  bool check( bool = false);                                // return true = lapse passed, callback called, stopwatch reset
-
-private:
-  StopwatchFunc _func;                                      // callback function
-
-  unsigned long _lapse;                                     // lapse time (in msec)
-  unsigned long _ticks;                                     // passed time since reset (in msec)
-};
-
-const char* shiftL( char*, char, char = 0);                 // move string between chars (C1, C2) to start of string
 const char* fill( const char*, int, bool = false);          // fill string with spaces until length L (true = centered)
-const char* hex( unsigned long, byte);                      // convert to hex string with leading zeros
-const char* dec( unsigned long, byte);                      // convert to dec string with leading zeros
+
+const char* dec( unsigned long);                            // convert to dec string without leading zeros
+const char* dec( unsigned long, uint8_t);                   // convert to dec string with leading zeros
+const char* hex( unsigned long, uint8_t);                   // convert to hex string with leading zeros
 
 #endif
