@@ -14,6 +14,7 @@
 #define SP         ;Serial.print(' ')                       // space
 #define SC         ;Serial.print(':')                       // space
 #define LF         ;Serial.println()                        // line feed
+#define LFLF       ;Serial.println();Serial.println()       // double line feed
 #define BEGIN(R)    Serial.begin(R)                         // start serial out (rate)
 #define PRINT(L)    Serial.print(L)                         // print (line)
 #define QUOTE(L)    Serial.print('\'');Serial.print(L);Serial.print('\'')
