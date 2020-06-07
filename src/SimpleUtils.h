@@ -14,34 +14,33 @@
 #include "SimpleDebug.h"
 
 #if   defined(__AVR__)
-//#define LED_BUILTIN     13                                  // built-in LED on Arduino UNO
-#define D0               0
-#define D1               1
-#define D2               2
-#define D3               3
-#define D4               4
-#define D5               5
-#define D6               6
-#define D7               7
-#define D8               8
-#define D9               9
-#define D10             10
-#define D11             11
-#define D12             12
-#define D13             13
+#define D0   0
+#define D1   1
+#define D2   2
+#define D3   3
+#define D4   4
+#define D5   5
+#define D6   6
+#define D7   7
+#define D8   8
+#define D9   9
+#define D10 10
+#define D11 11
+#define D12 12
+#define D13 13
 #elif defined(ESP8266)
-//#define LED_BUILTIN      2                                  // built-in LED on ESP8266
 #endif
-                                                            // required for Leonardo ETH
-#define ETHERNET_RESET(PIN) pinMode(PIN, OUTPUT);\
+                                                            
+// reset required for Leonardo ETH
+#define ETHERNET_RESET(PIN) pinMode(PIN, OUTPUT);\          
                             digitalWrite(PIN, HIGH); delay(200);\
                             digitalWrite(PIN, LOW ); delay(200);\
                             digitalWrite(PIN, HIGH); delay(200)
 
-#define minMax(A,B,C)       min(max(A,B),C)                   // return A between boundaries (B, C)
-#define strLen(A)           (strlen(A)  !=0)                  // return true = empty string (A)
-#define strCmp(A,B)         (strcmp(A,B)==0)                  // return true = equal string (A, B)
-#define strClr(D)           D[0]=0                            // clear string (D)
+#define minMax(A,B,C)       min(max(A,B),C)                 // return A between boundaries (B, C)
+#define strLen(A)           (strlen(A)  !=0)                // return true = empty string (A)
+#define strCmp(A,B)         (strcmp(A,B)==0)                // return true = equal string (A, B)
+#define strClr(D)           D[0]=0                          // clear string (D)
 
 void addChr( char*, const char , size_t);                   // add character to end of string
 void strCpy( char*, const char*, size_t);

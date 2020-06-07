@@ -16,7 +16,7 @@ public:
   SimpleBuffer( size_t);                                    // constructor (buffer size in bytes)
  ~SimpleBuffer();                                           // destructor
 
-  size_t available();                                       // return ovailable data items (1 item = 1 byte)
+  size_t available();                                       // return available data items (1 item = 1 byte)
   size_t free();                                            // return free item space (1 item = 1 byte)
   bool   full();                                            // checks if buffer is full
   void   print();                                           // print buffer counters (for debugging)
