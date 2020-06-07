@@ -38,10 +38,10 @@ hex()               // convert to hex string with leading zeros
 
 ## Library Dependencies
 
-- n/a
+- none specfic
 
 Version history:
 ```
-0.1             // initial version
-0.11            // some cleanup
+0.3                 // initial pulished version
+0.4                 // some cleanup
 ```
