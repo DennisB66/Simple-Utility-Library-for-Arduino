@@ -38,7 +38,7 @@ hex()               // convert to hex string with leading zeros
 
 ## Library Dependencies
 
-- https://github.com/DennisB66/Simple-Utility-Library-for-Arduino
+- n/a
 
 Version history:
 ```
