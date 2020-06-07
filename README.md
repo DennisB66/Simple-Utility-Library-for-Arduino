@@ -5,12 +5,12 @@ Library for an Arduino or ESP8266 supporting various utility macros and function
 
 The classes in the library include:
 ```
-SimpleTimer         // constructor = set lapse time + attach callback (optional)
+SimpleTimer         // constructor + set lapse time + attach callback (optional)
 lapse()             // set lapse time (msec) + timer reset
 reset()             // timer reset
 check()             // true = lapse time passed + callback called + timer reset
 
-SimpleBuffer        // constructor = set size (bytes)
+SimpleBuffer        // constructor + set size (bytes)
 available()         // return available items (bytes) in buffer
 free()              // return free space (bytes) in buffer
 full()              // true = buffer full / no free space
