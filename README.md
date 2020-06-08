@@ -1,5 +1,5 @@
 # Simple Utility Library for Arduino and ESP8266
-Library for an Arduino or ESP8266 supporting various utility macros and functions
+Library for Arduino or ESP8266 supporting various utility macros and functions
 
 ## Functionality
 
