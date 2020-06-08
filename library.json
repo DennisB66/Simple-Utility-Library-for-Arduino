@@ -1,6 +1,6 @@
 {
   "name": "Simple-Utility-Library-for-Arduino",
-  "keywords": "web, http, api, rest",
+  "keywords": "various",
   "description": "Library for an Arduino or ESP8266 supporting various utility macros and functions",
   "repository":
   {
@@ -16,7 +16,7 @@
       "maintainer": true
     }
   ],
-  "version": "0.31",
+  "version": "0.4",
   "frameworks": "arduino",
   "platforms": "*"
 }
